@@ -1,0 +1,496 @@
+/* ==========================================================================
+   STYLE.CSS - MY ANIME ARCHIVE
+   A cinematic, dark-themed personal anime collection.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VARIABLES
+   Easily change the main colors, spacing, and fonts here.
+   ========================================================================== */
+:root {
+  /* Color Palette (Dark, Anime-inspired, NO BLUE) */
+  --bg-base: #0a0a0c;            /* Deepest charcoal/black for main background */
+  --bg-surface: #151518;         /* Slightly lighter dark for cards and sections */
+  --bg-surface-hover: #1e1e24;   /* Highlight color when hovering over cards */
+  --bg-overlay: rgba(10, 10, 12, 0.85); /* Solid semi-transparent dark for overlays (No Gradients) */
+  
+  --text-main: #f4f4f5;          /* Off-white for high contrast readable text */
+  --text-muted: #a1a1aa;         /* Muted gray for subtitles and descriptions */
+  
+  --accent-red: #d62828;         /* Cinematic crimson for buttons and primary accents */
+  --accent-red-hover: #a11c1c;   /* Darker crimson for hover states */
+  --accent-purple: #7b2cbf;      /* Deep purple for secondary accents */
+  --accent-orange: #f77f00;      /* Vibrant orange for genre tags */
+  
+  --border-subtle: #27272a;      /* Soft dark gray for borders */
+  
+  /* Typography */
+  --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Spacing & Layout */
+  --section-padding: 80px 20px;
+  --container-max: 1200px;
+  
+  /* Borders & Shadows */
+  --radius-md: 8px;
+  --radius-sm: 4px;
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.4);
+  
+  /* Animations */
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s ease-in-out;
+}
+
+/* ==========================================================================
+   2. RESET & BASE
+   Removes default browser styles and sets the dark cinematic foundation.
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* Enables smooth scrolling to sections */
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ==========================================================================
+   3. HEADER & NAVIGATION
+   Sticky top bar with smooth hover effects.
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba(10, 10, 12, 0.95); /* Solid translucent background */
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 1000;
+  padding: 15px 20px;
+}
+
+.header-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color var(--transition-fast);
+}
+
+.logo a:hover {
+  color: var(--accent-red);
+}
+
+.nav-list {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color var(--transition-fast);
+  padding: 5px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+  border-bottom-color: var(--accent-red);
+}
+
+/* ==========================================================================
+   4. HERO SECTION
+   Large cinematic introduction area.
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  height: 85vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10; /* Keeps text above the dark overlay */
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: var(--text-main);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Background Image & Overlay (No Gradients allowed) */
+.hero-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Solid dark overlay to make text readable */
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-overlay);
+}
+
+/* ==========================================================================
+   5. BUTTONS
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  padding: 15px 35px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-red);
+  color: var(--text-main);
+  box-shadow: 0 4px 15px rgba(214, 40, 40, 0.4);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-red-hover);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   6. ANIME COLLECTION SECTION
+   Layout and grid for the anime cards.
+   ========================================================================== */
+.collection-section {
+  padding: var(--section-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.collection-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--text-main);
+  border-bottom: 3px solid var(--accent-purple);
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-top: 15px;
+}
+
+/* The Grid System */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* ==========================================================================
+   7. ANIME CARDS
+   Styling for individual anime entries.
+   ========================================================================== */
+.anime-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), background-color var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.anime-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-soft);
+  background-color: var(--bg-surface-hover);
+  border-color: var(--accent-purple);
+}
+
+/* Media/Poster Container */
+.card-media {
+  position: relative;
+  width: 100%;
+  padding-top: 140%; /* Creates a consistent portrait aspect ratio (approx 1:1.4) */
+  background-color: #000;
+  overflow: hidden;
+}
+
+.anime-poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents image distortion */
+  transition: transform 0.5s ease;
+}
+
+.anime-card:hover .anime-poster {
+  transform: scale(1.05); /* Smooth slight zoom on hover */
+}
+
+/* Watch Order Number */
+.entry-order {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: var(--bg-overlay);
+  color: var(--text-main);
+  padding: 6px 12px;
+  font-size: 1rem;
+  font-weight: 900;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent-red);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+/* Text details container */
+.card-details {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Pushes content to fill the card height */
+}
+
+.anime-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+/* Tags container */
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.anime-genre {
+  color: var(--accent-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.anime-status {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: rgba(45, 20, 44, 0.6); /* Very dark purple tint */
+  color: var(--text-main);
+  padding: 4px 8px;
+  border: 1px solid var(--accent-purple);
+  border-radius: var(--radius-sm);
+}
+
+.anime-synopsis {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-top: auto; /* Pushes synopsis to the bottom */
+}
+
+/* ==========================================================================
+   8. ABOUT SECTION
+   ========================================================================== */
+.about-section {
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--section-padding);
+}
+
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-text p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.about-text strong {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   9. FOOTER
+   ========================================================================== */
+.site-footer {
+  background-color: var(--bg-base);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.footer-note,
+.footer-copyright {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+/* ==========================================================================
+   10. RESPONSIVE DESIGN (Media Queries)
+   Ensures the website looks good on all devices.
+   ========================================================================== */
+
+/* Tablet & Smaller Desktop Screens */
+@media screen and (max-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .anime-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+}
+
+/* Mobile Screens */
+@media screen and (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav-list {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-description {
+    font-size: 1.1rem;
+  }
+
+  .anime-grid {
+    grid-template-columns: 1fr; /* 1 card per row */
+    max-width: 500px;
+    margin: 0 auto; /* Centers the single column */
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* ==========================================================================
+   11. ACCESSIBILITY (Reduced Motion)
+   Disables animations for users who prefer reduced motion.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
